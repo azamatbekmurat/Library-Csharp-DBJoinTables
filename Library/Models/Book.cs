@@ -130,6 +130,34 @@ namespace Library.Models
       }
       return newBook;
     }
+    public static Book FindByBookName(string bookTitle)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM books WHERE name = @bookName;";
+
+      cmd.Parameters.Add(new MySqlParameter("@bookName", bookTitle));
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int bookId = 0;
+      string bookName = "";
+      string bookGenre = "";
+
+      while(rdr.Read())
+      {
+        bookId = rdr.GetInt32(0);
+        bookName = rdr.GetString(1);
+        bookGenre = rdr.GetString(2);
+      }
+      Book newBook = new Book(bookName, bookGenre, bookId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newBook;
+    }
     public void AddAuthor(Author newAuthor)
     {
       MySqlConnection conn = DB.Connection();

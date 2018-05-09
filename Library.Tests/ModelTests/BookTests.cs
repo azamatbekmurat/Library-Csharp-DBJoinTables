@@ -60,7 +60,7 @@ namespace Library.Tests
       Assert.AreEqual(result, testId);
     }
     [TestMethod]
-    public void Find_FindsBookInDatabase_Book()
+    public void Find_FindsBookInDatabaseById_Book()
     {
       //Arrange
       Book testBook = new Book("Crime and Punishment", "Novel");
@@ -71,6 +71,19 @@ namespace Library.Tests
 
       //Assert
       Assert.AreEqual(testBook, foundBook);
+    }
+    [TestMethod]
+    public void Find_FindsBookInDatabaseByTitle_Book()
+    {
+      //Arrange
+      Book testBookFoundByTitle = new Book("Crime and Punishment", "Novel");
+      testBookFoundByTitle.Save();
+
+      //Act
+      Book foundByTitleBook = Book.FindByBookName(testBookFoundByTitle.GetName());
+
+      //Assert
+      Assert.AreEqual(testBookFoundByTitle, foundByTitleBook);
     }
     [TestMethod]
     public void GetAuthors_ReturnsAllBookAuthors_AuthorsList()
