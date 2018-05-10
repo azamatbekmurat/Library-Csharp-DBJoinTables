@@ -137,6 +137,23 @@ namespace Library.Tests
       //Assert
       CollectionAssert.AreEqual(testAuthorBooks, resultAuthorBooks);
     }
+    [TestMethod]
+    public void Update_UpdatesBookAssociationsInDatabase_Book()
+    {
+      //Arrange
+      Book testBook = new Book("Punish", "Short tale");
+      testBook.Save();
+
+      //Act
+      string newName = "Crime and Punishment";
+      string newGenre = "Novel";
+      testBook.UpdateBookDetails(newName, newGenre);
+      Book result = Book.Find(testBook.GetId());
+
+      //Assert
+      Assert.AreEqual("Crime and Punishment", result.GetName());
+      Assert.AreEqual("Novel", result.GetGenre());
+    }
 
   }
 }

@@ -207,25 +207,20 @@ namespace Library.Models
       }
       return authors;
     }
-    public void UpdateBookName(string newName)
+    public void UpdateBookDetails(string newName, string newGenre)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"UPDATE books SET name = @newName WHERE id = @searchId;";
+      cmd.CommandText = @"UPDATE books SET name = @newName, genre = @newGenre WHERE id = @searchId;";
 
-      MySqlParameter searchId = new MySqlParameter();
-      searchId.ParameterName = "@searchId";
-      searchId.Value = _id;
-      cmd.Parameters.Add(searchId);
-
-      MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@newName";
-      name.Value = newName;
-      cmd.Parameters.Add(name);
+      cmd.Parameters.Add(new MySqlParameter("@searchId", _id));
+      cmd.Parameters.Add(new MySqlParameter("@newName", newName));
+      cmd.Parameters.Add(new MySqlParameter("@newGenre", newGenre));
 
       cmd.ExecuteNonQuery();
       _name = newName;
+      _genre = newGenre;
       conn.Close();
       if (conn != null)
       {
