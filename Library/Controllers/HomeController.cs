@@ -17,12 +17,6 @@ namespace Library.Controllers
       {
           return View();
       }
-      // [HttpGet("/books/info/{bookId}")]
-      // public ActionResult Info(int bookId)
-      // {
-      //   Book foundBook = Book.Find(bookId);
-      //   return View("Index",foundBook);
-      // }
       [HttpGet("/books/search")]
       public ActionResult SearchResult()
       {
@@ -30,6 +24,16 @@ namespace Library.Controllers
         List<Book> allFoundBooksByName = Book.FindByBookName(searchString);
 
         return View(allFoundBooksByName);
+      }
+      [HttpGet("/update")]
+      public ActionResult Update()
+      {
+          return View();
+      }
+      [HttpGet("/delete")]
+      public ActionResult Delete()
+      {
+          return View();
       }
 
 

@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Change information about the Book</h1>
+      <hr />
+      <h3>Title: @Model.GetName(), Genre: @Model.GetGenre()</h3>
+      <br>
+      <form action="/books/edit/@Model.GetId()/change" method="post">
+        <label for="editName">New Name of the Book:</label>
+        <input id="editName" name="editName" type="text">
+        <label for="editGenre">New Genre of the Book:</label>
+        <input id="editGenre" name="editGenre" type="text">
+        <button type="submit">Change info!</button>
+      </form>
+      <br>
+      <h4><a href="/">Return home</a></h4>
+      <h4><a href="/books">View all books</a></h4>
+    </div>
+  </div>
+</div>

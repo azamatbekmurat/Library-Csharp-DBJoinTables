@@ -45,6 +45,26 @@ namespace Library.Controllers
         book.AddAuthor(author);
         return RedirectToAction("BookDetails", new { id = bookId });
       }
+      [HttpGet("/books/{id}/edit")]
+      public ActionResult BookEditForm(int id)
+      {
+        Book thisBook = Book.Find(id);
+        return View("BookEditForm", thisBook);
+      }
+      [HttpPost("/books/edit/{bookId}/change")]
+      public ActionResult EditBookInfo(int bookId)
+      {
+        Book selectedBook = Book.Find(bookId);
+        selectedBook.UpdateBookDetails(Request.Form["editName"], Request.Form["editGenre"]);
+        return RedirectToAction("Update", "Home");
+      }
+      [HttpPost("/books/{bookId}/delete")]
+      public ActionResult DeleteBook(int bookId)
+      {
+        Book selectedBook = Book.Find(bookId);
+        selectedBook.Delete();
+        return RedirectToAction("Delete", "Home");
+      }
 
     }
 }

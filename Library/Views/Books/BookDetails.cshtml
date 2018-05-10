@@ -30,7 +30,18 @@
           </select>
           <button type='submit'>Add an author to this book!</button>
         </form>
-      <h4><a href="/">Return to Home Page</a></h4>
+        <br>
+        <form action='/books/@Model["selectedBook"].GetId()/edit' method='post'>
+          <button type='submit'>Edit info!</button>
+        </form>
+        <br>
+        <form action='/books/@Model["selectedBook"].GetId()/delete' method='post'>
+          <button type='submit'>Delete this book!</button>
+        </form>
+        <br>
+        @* <h4><a href="/books/@Model["selectedBook"].GetId()/edit">Edit info</a></h4> *@
+        @* <h4 method='post'><a href="/books/@Model["selectedBook"].GetId()/delete">Delete book</a></h4> *@
+        <h4><a href="/">Return to Home Page</a></h4>
 
     </div>
   </div>
