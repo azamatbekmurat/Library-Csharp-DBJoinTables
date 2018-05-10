@@ -130,33 +130,36 @@ namespace Library.Models
       }
       return newBook;
     }
-    public static Book FindByBookName(string bookTitle)
+    public static List<Book> FindByBookName(string searchValue)
     {
+      List<Book> allFoundBooks = new List<Book> {};
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM books WHERE name = @bookName;";
+      cmd.CommandText = @"SELECT * FROM books WHERE name LIKE @partOfBookName;";
 
-      cmd.Parameters.Add(new MySqlParameter("@bookName", bookTitle));
+      cmd.Parameters.Add(new MySqlParameter("@partOfBookName", "%"+searchValue+"%"));
+
+      // Console.WriteLine(cmd.CommandText);
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
-      int bookId = 0;
-      string bookName = "";
-      string bookGenre = "";
 
       while(rdr.Read())
       {
-        bookId = rdr.GetInt32(0);
-        bookName = rdr.GetString(1);
-        bookGenre = rdr.GetString(2);
+        // Console.WriteLine("BOOK FOUND");
+        int bookId = rdr.GetInt32(0);
+        string bookName = rdr.GetString(1);
+        string bookGenre = rdr.GetString(2);
+        Book newBook = new Book(bookName, bookGenre, bookId);
+        allFoundBooks.Add(newBook);
       }
-      Book newBook = new Book(bookName, bookGenre, bookId);
+
       conn.Close();
       if (conn != null)
       {
         conn.Dispose();
       }
-      return newBook;
+      return allFoundBooks;
     }
     public void AddAuthor(Author newAuthor)
     {

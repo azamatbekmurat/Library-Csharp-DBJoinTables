@@ -23,13 +23,14 @@ namespace Library.Controllers
         Book foundBook = Book.Find(bookId);
         return View("Index",foundBook);
       }
-      // [HttpGet("/books/search")]
-      // public ActionResult SearchByName()
-      // {
-      //   string searchString = [Request.Query("bookTitle")];
-      //   Book foundBook = Book.FindByBookName(searchString);
-      //   return View("",foundBook);
-      // }
+      [HttpGet("/books/search")]
+      public ActionResult SearchResult()
+      {
+        string searchString = Request.Query["bookTitle"];
+        List<Book> allFoundBooksByName = Book.FindByBookName(searchString);
+
+        return View(allFoundBooksByName);
+      }
 
 
     }

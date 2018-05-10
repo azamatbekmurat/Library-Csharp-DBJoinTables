@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h3>Search Result:</h3>
+    @if (Model.Count == 1)
+    {
+      <h4>Yes, we have such a book in our library:</h4>
+      <ul>
+        @foreach(var book in Model)
+        {
+
+          <li><a href='/books/@book.GetId()'>@book.GetName(), @book.GetGenre()</a></li>
+        }
+
+      </ul>
+    }
+    else if (Model.Count > 1)
+    {
+      <h4>Here is a list of found books:</h4>
+      <ul>
+        @foreach(var book in Model)
+        {
+
+          <li><a href='/books/@book.GetId()'>@book.GetName(), @book.GetGenre()</a></li>
+        }
+
+      </ul>
+    }
+    else
+    {
+      <h4>Unfortunately, we don't have such a book</h4>
+    }
+    <p><a href="/">Return Home</a></p>
+  </body>
+</html>

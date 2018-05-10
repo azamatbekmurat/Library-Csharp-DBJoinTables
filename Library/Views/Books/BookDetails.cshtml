@@ -1,0 +1,6 @@
+@using Library.Models;
+
+<h1>Book Details</h1>
+  <h2>Book: @Model["foundBookByName"].GetName()</h2>
+  <hr />
+  @if (@Model["bookAuthors"])

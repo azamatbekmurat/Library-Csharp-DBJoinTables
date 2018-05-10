@@ -13,7 +13,7 @@ namespace Library.Tests
   {
     public BookTests()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=library_test;";
     }
     public void Dispose()
     {
@@ -76,14 +76,22 @@ namespace Library.Tests
     public void Find_FindsBookInDatabaseByTitle_Book()
     {
       //Arrange
-      Book testBookFoundByTitle = new Book("Crime and Punishment", "Novel");
-      testBookFoundByTitle.Save();
+      Book testBook1 = new Book("Harry Potter", "Novel");
+      testBook1.Save();
+
+      Book testBook2 = new Book("Potter Crime", "Fiction");
+      testBook2.Save();
 
       //Act
-      Book foundByTitleBook = Book.FindByBookName(testBookFoundByTitle.GetName());
+      List<Book> result  = Book.FindByBookName("Potter");
+      List<Book> testList = new List<Book>{testBook1, testBook2};
+
+      // Console.WriteLine to see what number of elements in the List
+      Console.WriteLine(result.Count);
+      Console.WriteLine(testList.Count);
 
       //Assert
-      Assert.AreEqual(testBookFoundByTitle, foundByTitleBook);
+      CollectionAssert.AreEqual(testList, result);
     }
     [TestMethod]
     public void GetAuthors_ReturnsAllBookAuthors_AuthorsList()
