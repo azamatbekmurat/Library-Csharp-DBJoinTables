@@ -25,19 +25,26 @@ namespace Library.Controllers
         newBook.Save();
         return RedirectToAction("Success", "Home");
       }
-      // [HttpGet("/books/search")]
-      // public ActionResult SearchResult()
-      // {
-      //   Dictionary<string, object> foundBookDetails = new Dictionary<string, object> ();
-      //   string searchString = Request.Query["bookTitle"];
-      //   Book foundBookByName = Book.FindByBookName(searchString);
-      //   List<Author> bookAuthors = foundBookByName.GetAuthors();
-      //   List<Author> allAuthors = Author.GetAllAuthors();
-      //   foundBookDetails.Add("foundBook", foundBookByName);
-      //   foundBookDetails.Add("bookAuthors", bookAuthors);
-      //   foundBookDetails.Add("allAuthors", allAuthors);
-      //   return View(foundBookByName);
-      // }
+      [HttpGet("/books/{id}")]
+      public ActionResult BookDetails(int id)
+      {
+        Dictionary<string, object> foundBookDetails = new Dictionary<string, object> ();
+        Book selectedBook = Book.Find(id);
+        List<Author> bookAuthors = selectedBook.GetAuthors();
+        List<Author> allAuthors = Author.GetAllAuthors();
+        foundBookDetails.Add("selectedBook", selectedBook);
+        foundBookDetails.Add("bookAuthors", bookAuthors);
+        foundBookDetails.Add("allAuthors", allAuthors);
+        return View(foundBookDetails);
+      }
+      [HttpPost("/books/{bookId}/authors/new")]
+      public ActionResult AddAnAuthor(int bookId)
+      {
+        Book book = Book.Find(bookId);
+        Author author = Author.Find(Int32.Parse(Request.Form["author-id"]));
+        book.AddAuthor(author);
+        return RedirectToAction("BookDetails", new { id = bookId });
+      }
 
     }
 }

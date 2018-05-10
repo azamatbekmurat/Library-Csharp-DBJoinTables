@@ -1,17 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <body>
+@{
+  Layout = "_Layout";
+}
 
-    <h1>The Library</h1>
-    <hr />
-    <form action="/books/search" method="get">
-      <label for="bookTitle">Enter book title:</label>
-      <input id="bookTitle" name="bookTitle" type="text">
-      <button type="submit">Search!</button>
-    </form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
 
-    <h4><a href="/books">View Books</a></h4>
-    <h4><a href="/authors">View Authors</a></h4>
+      <form action="/books/search" method="get">
+        <label for="bookTitle">Enter book title:</label>
+        <input id="bookTitle" name="bookTitle" type="text">
+        <button type="submit">Search!</button>
+      </form>
+      <hr />
 
-  </body>
-</html>
+      <h3><a href="/books">View Books</a></h3>
+      <h3><a href="/authors">View Authors</a></h3>
+    </div>
+  </div>
+</div>

@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>New Author Form</h1>
-    <hr />
-    <form action="/authorForm" method="post">
-      <label for="authorName">Author Name:</label>
-      <input id="authorName" name="authorName" type="text">
-      <button type="submit">Add a Author!</button>
-    </form>
-    <h4><a href="/">Return home</a></h4>
-    <p><a href="/authors">View all authors</a></p>
-
-
-  </body>
-</html>
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>New Author Form</h1>
+      <hr />
+      <form action="/authorForm" method="post">
+        <label for="authorName">Author Name:</label>
+        <input id="authorName" name="authorName" type="text">
+        <button type="submit">Add a Author!</button>
+      </form>
+      <h4><a href="/">Return home</a></h4>
+      <h4><a href="/authors">View all authors</a></h4>
+    </div>
+  </div>
+</div>

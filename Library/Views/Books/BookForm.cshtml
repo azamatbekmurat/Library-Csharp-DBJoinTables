@@ -1,18 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <body>
-    <h1>New Book Form</h1>
-    <hr />
-    <form action="/bookForm" method="post">
-      <label for="bookName">Book Name:</label>
-      <input id="bookName" name="bookName" type="text">
-      <label for="bookGenre">Genre:</label>
-      <input id="bookGenre" name="bookGenre" type="text">
-      <button type="submit">Add a book!</button>
-    </form>
-    <h4><a href="/">Return home</a></h4>
-    <p><a href="/books">View all books</a></p>
-
-
-  </body>
-</html>
+@{
+  Layout = "_Layout";
+}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>New Book Form</h1>
+      <hr />
+      <form action="/bookForm" method="post">
+        <label for="bookName">Book Name:</label>
+        <input id="bookName" name="bookName" type="text">
+        <label for="bookGenre">Genre:</label>
+        <input id="bookGenre" name="bookGenre" type="text">
+        <button type="submit">Add a book!</button>
+      </form>
+      <h4><a href="/">Return home</a></h4>
+      <h4><a href="/books">View all books</a></h4>
+    </div>
+  </div>
+</div>
