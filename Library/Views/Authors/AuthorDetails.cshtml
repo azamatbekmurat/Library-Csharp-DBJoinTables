@@ -1,3 +1,5 @@
+@using Library.Models;
+
 @{
   Layout = "_Layout";
 }
@@ -5,6 +7,40 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+
+    <h1>Author Details:</h1>
+      <h2>@Model["selectedAuthor"].GetName()</h2>
+      <hr />
+      @if (@Model["authorBooks"].Count != 0)
+      {
+        <h4>This author has these books:</h4>
+        <ul>
+          @foreach (Book book in @Model["authorBooks"])
+          {
+            <li>@book.GetName()</li>
+          }
+        </ul>
+      }
+      <h4>Add a book to this author:</h4>
+      <form action='/authors/@Model["selectedAuthor"].GetId()/books/new' method='post'>
+        <label for='book-id'>Select an book</label>
+        <select id='book-id' name='book-id' type='text'>
+          @foreach (var book in @Model["allBooks"])
+          {
+            <option value='@book.GetId()'>@book.GetName()</option>
+          }
+        </select>
+        <button type='submit'>Add a book to this author!</button>
+      </form>
+      <br>
+      <form action='/authors/@Model["selectedAuthor"].GetId()/delete' method='post'>
+        <button type='submit'>Delete this author!</button>
+      </form>
+      <br>
+      <h4><a href="/">Return to Home</a></h4>
+      <br><br><br>
+
+
 
     </div>
   </div>

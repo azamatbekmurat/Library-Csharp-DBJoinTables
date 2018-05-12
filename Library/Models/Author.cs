@@ -121,9 +121,9 @@ namespace Library.Models
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = @"SELECT books.* FROM authors
-      JOIN books_authors ON (author_id=books_authors.author_id)
+      JOIN books_authors ON (authors.id=books_authors.author_id)
       JOIN books ON (books_authors.book_id=books.id)
-      WHERE author_id=@AuthorId;";
+      WHERE authors.id=@AuthorId;";
 
       cmd.Parameters.Add(new MySqlParameter("@AuthorId", _id));
 
@@ -137,7 +137,6 @@ namespace Library.Models
         Book newBook = new Book(bookName, bookGenre, bookId);
         books.Add(newBook);
       }
-      rdr.Dispose();
 
       conn.Close();
       if (conn != null)
